@@ -16,6 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from shortener.views import kerr_redirect_view, KerrRedirectView
+
+# https://github.com/codingforentrepreneurs/Guides/blob/master/all/common_url_regex.md
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^djadmin/', admin.site.urls),
+    url(r'^view-1/$', kerr_redirect_view),
+    url(r'^view-2/$', KerrRedirectView.as_view()),
+    url(r'a/(?P<shortcode>[\w-]+)/$', kerr_redirect_view),
+    url(r'b/(?P<shortcode>[\w-]+)/$', KerrRedirectView.as_view()),
 ]
