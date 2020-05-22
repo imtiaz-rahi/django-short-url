@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 
@@ -10,12 +11,15 @@ from .models import KirrURL
 def kerr_redirect_view(request, shortcode=None, *args, **kwargs):
     """Function based view"""
     # obj = KirrURL.objects.get(shortcode=shortcode)
-
-    obj_url = None
-    qs = KirrURL.objects.filter(shortcode__iexact=shortcode)
-    if qs.exists() and qs.count() == 1:
-        obj_url = qs.first().url
-    return HttpResponse(f'Function {inspect.stack()[0][3]} Hello: {obj_url}')
+    if settings.DEBUG:
+        print(f'view : {shortcode}')
+    obj = get_object_or_404(KirrURL, shortcode=shortcode)
+    return HttpResponseRedirect(obj.url)
+    # obj_url = None
+    # qs = KirrURL.objects.filter(shortcode__iexact=shortcode)
+    # if qs.exists() and qs.count() == 1:
+    #     obj_url = qs.first().url
+    # return HttpResponse(f'Function {inspect.stack()[0][3]} Hello: {obj_url}')
 
 
 def whoami():
