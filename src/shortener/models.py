@@ -1,5 +1,8 @@
 from django.conf import settings
+from django.urls import reverse
 from django.db import models
+from django_hosts.resolvers import reverse
+from .validators import validate_url, validate_dot_com
 from .utils import create_shortcode
 
 # Safer way: will not break code if we forget to define it
@@ -29,7 +32,7 @@ class KirrUrlManager(models.Manager):
 class KirrURL(models.Model):
     """Model definition for KirrURL."""
 
-    url = models.CharField(max_length=220)
+    url = models.CharField(max_length=220, validators=[validate_url, validate_dot_com])
     shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -49,3 +52,8 @@ class KirrURL(models.Model):
     def __str__(self):
         """Unicode representation of KirrURL."""
         return str(self.url)
+
+    def get_short_url(self):
+        return reverse('shorturl', kwargs={'shortcode': self.shortcode}, port='8000', scheme='http')
+        # return reverse("shorturl", kwargs={'shortcode': self.shortcode})  # works
+        # return "/a/{sc}".format(sc=self.shortcode)

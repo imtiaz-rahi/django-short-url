@@ -9,6 +9,7 @@ db.sqlite3
 pip-selfcheck.json
 *.py[cod]
 *.DS_Store
+*.swp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

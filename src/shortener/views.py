@@ -4,10 +4,37 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 import inspect
+from .forms import SubmitUrlForm
 from .models import KirrURL
 
 
 # Create your views here.
+class HomeView(View):
+
+    def get(self, request, *args, **kwargs):
+        print(request.GET)
+        ctx = {
+            'h1title': 'URL shortener service',
+            'form': SubmitUrlForm()
+        }
+        return render(request, "shortener/home.html", context=ctx)
+
+    def post(self, request, *args, **kwargs):
+        frm = SubmitUrlForm(request.POST)
+        template = "shortener/home.html"
+        ctx = {
+            'h1title': 'URL shortener service',
+            'form': frm
+        }
+        if frm.is_valid():
+            obj, created = KirrURL.objects.get_or_create(url=frm.cleaned_data.get("url"))
+            template = "shortener/created.html" if created else "shortener/exists.html"
+            ctx = {
+                "object": obj,
+                "created": created
+            }
+        return render(request, template, ctx)
+
 def kerr_redirect_view(request, shortcode=None, *args, **kwargs):
     """Function based view"""
     # obj = KirrURL.objects.get(shortcode=shortcode)

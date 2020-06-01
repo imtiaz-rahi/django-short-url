@@ -15,16 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
-from shortener.views import kerr_redirect_view, KerrRedirectView
+from shortener.views import HomeView, kerr_redirect_view, KerrRedirectView
 
 # https://github.com/codingforentrepreneurs/Guides/blob/master/all/common_url_regex.md
 urlpatterns = [
     url(r'^djadmin/', admin.site.urls),
+    url(r'^$', HomeView.as_view(), name="Homepage"),
     url(r'^view-1/$', kerr_redirect_view),
     url(r'^view-2/$', KerrRedirectView.as_view()),
     # url(r'(?P<shortcode>[\w-]+){6,15}/$', kerr_redirect_view),    # wrong
     # url(r'^(?P<shortcode>[\w-]+)/$', URLRedirectView.as_view(), name='scode'),
-    url(r'a/(?P<shortcode>[\w-]{4,15})/$', kerr_redirect_view),
+    url(r'a/(?P<shortcode>[\w-]{4,15})/$', kerr_redirect_view, name='shorturl'),
     url(r'b/(?P<shortcode>[\w-]+)/$', KerrRedirectView.as_view()),
+    url(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
 ]
