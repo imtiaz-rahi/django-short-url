@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^view-2/$', KerrRedirectView.as_view()),
     # url(r'(?P<shortcode>[\w-]+){6,15}/$', kerr_redirect_view),    # wrong
     # url(r'^(?P<shortcode>[\w-]+)/$', URLRedirectView.as_view(), name='scode'),
-    url(r'a/(?P<shortcode>[\w-]{4,15})/$', kerr_redirect_view, name='shorturl'),
-    url(r'b/(?P<shortcode>[\w-]+)/$', KerrRedirectView.as_view()),
+    url(r'a/(?P<shortcode>[\w-]{4,15})/$', KerrRedirectView.as_view(), name='shorturl'),
+    url(r'b/(?P<shortcode>[\w-]+)/$', kerr_redirect_view),
     url(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
 ]

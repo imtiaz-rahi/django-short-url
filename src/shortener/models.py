@@ -37,6 +37,7 @@ class KirrURL(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
     objects = KirrUrlManager()
 
     def save(self, *args, **kwargs):
