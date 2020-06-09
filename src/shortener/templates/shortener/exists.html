@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>URL Exists</title>
-</head>
-<body>
-    <div align="center">
-        <p>{{object.url}}</p>
+{% extends 'base.html' %}
+
+{% block title %} {{ object.shortcode }} | {{ block.super }} {% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+    <h5>URL exists</h5>
+    <h4 class="display-4">{{object.url}}
         {% if object.clickevent %}
-        <p>Count {{object.clickevent.count}}</p>
+        <span class="badge badge-secondary">{{object.clickevent.count}}</span>
         {% endif %}
-        <a href="{{object.get_short_url}}">{{object.shortcode}}</a>
-        <p>{{object.get_short_url}}</p>
-    </div>
-</body>
-</html>
+    </h4>
+    <hr class="my-4">
+    <h3 class="mr-4">{{object.get_short_url}}</h3>
+    <a class="btn btn-info btn-lg" href="{{object.get_short_url}}" title="Click here">
+        {{object.shortcode}}</a>
+</div>
+{% endblock content %}

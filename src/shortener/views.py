@@ -17,7 +17,7 @@ class HomeView(View):
         if settings.DEBUG:
             print(request.GET)
         ctx = {
-            'h1title': 'URL shortener service',
+            'h1title': 'kirr.co shortener',
             'form': SubmitUrlForm()
         }
         return render(request, "shortener/home.html", context=ctx)
@@ -26,7 +26,7 @@ class HomeView(View):
         frm = SubmitUrlForm(request.POST)
         template = "shortener/home.html"
         ctx = {
-            'h1title': 'URL shortener service',
+            'h1title': 'kirr.co shortener',
             'form': frm
         }
         if frm.is_valid():

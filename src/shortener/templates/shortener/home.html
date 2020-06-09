@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>URL Shortener Home</title>
-</head>
-<body>
-    <div align="center">
-        <h1>{{h1title}}</h1>
-        <form method="POST" action=".">
-            {% csrf_token %}
-            {{ form.as_p }}
-<!--            <fieldset class="cf">-->
-<!--                <input id="shorten_url" class="shorten-input" autocomplete="off" name="url" type="text" value="" placeholder="Shorten your link" />-->
-<!--                <input id="shorten_btn" class="button button-primary button-large shorten-button" type="submit" value="Shorten" />-->
-<!--            </fieldset>-->
-<!--            <p></p>-->
-<!--            <input type="text" placeholder="url" size="100" />-->
-<!--            <br /><br />-->
-            <input type="submit" value="Short it" />
-        </form>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+{% block content %}
+<main role="main" class="inner cover">
+    <div class="text-center">
+        <h1 class="cover-heading">{{h1title}}</h1>
+        <p class="lead">
+            <form method="POST" action=".">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="btn btn-primary" type="submit" value="Short it" />
+            </form>
+        </p>
+    </div>    
+</main>
+{% endblock content %}

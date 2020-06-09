@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shortened URL</title>
-</head>
-<body>
-    <div align="center">
+{% extends 'base.html' %}
+
+{% block title %} {{ object.shortcode }} | {{ block.super }} {% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+    <h5>URL created</h5>
     <p>{{object.url}}</p>
-    <p>{{object.shortcode}}</p>
-    <a href="{{object.get_short_url}}">{{object.shortcode}}</a>
-        <p>
-            <a href="/">+ New</a>
-        </p>
+    <hr class="my-4">
+    <div class="col-sm-9 my-1">
+        <input id="txt_short_url" type="text" class="form-control" value="{{object.get_short_url}}" readonly/>
+        <button class="btn btn-info btn-lg" title="Copy URL" onclick="copyIt()">Copy</button>
     </div>
-</body>
-</html>
+
+    <hr class="my-4">
+    <a class="btn btn-primary" href="/">+ New</a>
+</div>
+<script>
+    function copyIt(e) {
+        var obj = document.getElementById("txt_short_url");
+        obj.select();
+        obj.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+    }
+</script>
+{% endblock content %}
