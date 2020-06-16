@@ -14,8 +14,8 @@ from .models import KirrURL
 class HomeView(View):
 
     def get(self, request, *args, **kwargs):
-        if settings.DEBUG:
-            print(request.GET)
+        # if settings.DEBUG:
+        #     print(request.GET)
         ctx = {
             'h1title': 'kirr.co shortener',
             'form': SubmitUrlForm()
@@ -41,8 +41,8 @@ class HomeView(View):
 def kerr_redirect_view(request, shortcode=None, *args, **kwargs):
     """Function based view"""
     # obj = KirrURL.objects.get(shortcode=shortcode)
-    if settings.DEBUG:
-        print(f'view : {shortcode}')
+    # if settings.DEBUG:
+    #     print(f'view : {shortcode}')
     obj = get_object_or_404(KirrURL, shortcode=shortcode)
     return HttpResponseRedirect(obj.url)
     # obj_url = None

@@ -3,16 +3,16 @@
 {% block title %} {{ object.shortcode }} | {{ block.super }} {% endblock title %}
 
 {% block content %}
-<div class="jumbotron">
-    <h5>URL exists</h5>
-    <h4 class="display-4">{{object.url}}
-        {% if object.clickevent %}
-        <span class="badge badge-secondary">{{object.clickevent.count}}</span>
-        {% endif %}
-    </h4>
-    <hr class="my-4">
-    <h3 class="mr-4">{{object.get_short_url}}</h3>
-    <a class="btn btn-info btn-lg" href="{{object.get_short_url}}" title="Click here">
-        {{object.shortcode}}</a>
-</div>
+<h5>URL exists</h5>
+<h4 class="display-4">{{object.url}}
+    {% if object.clickevent %}
+    <span class="badge badge-secondary" title="Count">{{object.clickevent.count}}</span>
+    {% endif %}
+</h4>
+<hr class="my-4">
+<h3 class="display-5 mr-4">{{object.get_short_url}}
+    <a class="btn btn-info" href="{{object.get_short_url}}" title="Visit URL">{{object.shortcode}}</a>        
+</h3>
+<hr class="my-4">
+<a class="btn btn-primary btn-lg" href="/">+ New</a>
 {% endblock content %}

@@ -11,11 +11,21 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static 'cover.css' %}" />
+    <style>
+        body {
+            background-image: url("{% static 'images/beach.jpg' %}");
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mt-2">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mt-4">
+    <main role="main" class="inner cover">
+        <div class="text-center">
     {% block content %}
     {% endblock content %}
+        </div>
+    </main>
 </div>
 </body>
 </html>

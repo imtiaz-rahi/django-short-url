@@ -2,16 +2,12 @@
 
 
 {% block content %}
-<main role="main" class="inner cover">
-    <div class="text-center">
-        <h1 class="cover-heading">{{h1title}}</h1>
-        <p class="lead">
-            <form method="POST" action=".">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input class="btn btn-primary" type="submit" value="Short it" />
-            </form>
-        </p>
-    </div>    
-</main>
+<h1 class="cover-heading">{{h1title}}</h1>
+<p class="lead">
+    <form method="POST" action="." autocomplete="on">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary" type="submit" value="Shorten &raquo;" />
+    </form>
+</p>
 {% endblock content %}
